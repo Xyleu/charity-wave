@@ -163,8 +163,10 @@ const Charities = () => {
                       </div>
                     </div>
                     
-                    <Button className="w-full" data-address={campaign.address}>
-                      Donate Now
+                    <Button asChild className="w-full">
+                      <Link to={`/charity/${campaign.id}`}>
+                        Donate Now
+                      </Link>
                     </Button>
                   </div>
                 </div>
