@@ -32,7 +32,7 @@ export const campaigns: Campaign[] = [
     target: 200,
     daysLeft: 15,
     address: "edu123",
-    icon: <BookOpen className="h-5 w-5" />,
+    icon: <BookOpen className="h-5 w-5" />
   },
   {
     id: "2",
@@ -44,7 +44,7 @@ export const campaigns: Campaign[] = [
     target: 200,
     daysLeft: 20,
     address: "health123",
-    icon: <HeartPulse className="h-5 w-5" />,
+    icon: <HeartPulse className="h-5 w-5" />
   },
   {
     id: "3",
@@ -56,7 +56,7 @@ export const campaigns: Campaign[] = [
     target: 200,
     daysLeft: 25,
     address: "env123",
-    icon: <Leaf className="h-5 w-5" />,
+    icon: <Leaf className="h-5 w-5" />
   },
   {
     id: "4",
@@ -68,7 +68,7 @@ export const campaigns: Campaign[] = [
     target: 200,
     daysLeft: 40,
     address: "art123",
-    icon: <Palette className="h-5 w-5" />,
+    icon: <Palette className="h-5 w-5" />
   },
   {
     id: "5",
@@ -80,7 +80,7 @@ export const campaigns: Campaign[] = [
     target: 200,
     daysLeft: 10,
     address: "food123",
-    icon: <Apple className="h-5 w-5" />,
+    icon: <Apple className="h-5 w-5" />
   },
   {
     id: "6",
@@ -92,6 +92,6 @@ export const campaigns: Campaign[] = [
     target: 200,
     daysLeft: 30,
     address: "tech123",
-    icon: <Laptop className="h-5 w-5" />,
-  },
+    icon: <Laptop className="h-5 w-5" />
+  }
 ];
