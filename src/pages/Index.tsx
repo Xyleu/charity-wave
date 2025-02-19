@@ -1,8 +1,11 @@
 
 import { Heart, Trophy, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 import { Navbar } from "@/components/Navbar";
 import { Link } from "react-router-dom";
+import { campaigns } from "@/data/campaigns";
 
 const Index = () => {
   return (
@@ -33,8 +36,68 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Featured Campaigns Section */}
       <section className="py-20 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Featured Campaigns</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {campaigns.slice(0, 3).map((campaign) => (
+              <Card key={campaign.id} className="group flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl">
+                <div className="relative overflow-hidden">
+                  <img
+                    src={campaign.image}
+                    alt={campaign.title}
+                    className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-sm">
+                    {campaign.icon}
+                    <span className="text-sm font-medium">{campaign.category}</span>
+                  </div>
+                </div>
+                
+                <CardContent className="p-6 flex-1 flex flex-col bg-white">
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                    {campaign.title}
+                  </h3>
+                  <p className="text-gray-600 mb-6 flex-1">{campaign.description}</p>
+                  
+                  <div className="space-y-4">
+                    <div className="relative pt-1">
+                      <Progress 
+                        value={(campaign.collected / campaign.target) * 100} 
+                        className="h-2"
+                      />
+                      <div className="absolute -top-2 right-0 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                        {Math.round((campaign.collected / campaign.target) * 100)}%
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="space-y-1">
+                        <div className="text-sm text-gray-600">
+                          <span className="font-semibold text-primary">{campaign.collected} SOL</span>
+                          {" "}of {campaign.target} SOL
+                        </div>
+                      </div>
+                      <div className="text-sm font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                        {campaign.daysLeft} days left
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Button asChild size="lg">
+              <Link to="/charities">View All Campaigns</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex flex-col items-center p-6 rounded-lg bg-white shadow-sm border border-gray-100 transition-transform hover:scale-105">
@@ -57,7 +120,7 @@ const Index = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-white/50 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
