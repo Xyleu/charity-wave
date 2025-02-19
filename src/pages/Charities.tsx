@@ -5,43 +5,25 @@ import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { campaigns } from "@/data/campaigns";
+import { Navbar } from "@/components/Navbar";
 
 const Charities = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-purple-50 to-indigo-50 py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" asChild className="group">
-                <Link to="/" className="flex items-center gap-2">
-                  <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                  Back to Home
-                </Link>
-              </Button>
-            </div>
-            <Button variant="outline">View All</Button>
+      <Navbar />
+      <div className="container mx-auto px-4 py-24">
+        <div className="flex justify-between items-center mb-12">
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" asChild className="group">
+              <Link to="/" className="flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                Back to Home
+              </Link>
+            </Button>
           </div>
-
-          <div className="mb-12 text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Make a Real <span className="text-primary">Impact</span> Today
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              Support these urgent causes and make a real difference in people's lives. 
-              Every donation counts towards creating positive change.
-            </p>
-            <div className="flex justify-center gap-4 mb-8">
-              <Button size="lg" className="text-lg px-8">Start Donating</Button>
-              <Button size="lg" variant="outline" className="text-lg px-8">Learn More</Button>
-            </div>
-          </div>
+          <Button variant="outline">View All</Button>
         </div>
-      </div>
 
-      {/* Campaigns Grid */}
-      <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {campaigns.map((campaign) => (
             <Card key={campaign.id} className="group flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl">
