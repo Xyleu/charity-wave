@@ -3,10 +3,22 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Info, ExternalLink } from "lucide-react";
 import { campaigns } from "@/data/campaigns";
+import { 
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 const Charities = () => {
+  const [showAll, setShowAll] = useState(false);
+  const displayedCampaigns = showAll ? campaigns : campaigns.slice(0, 6);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
@@ -21,7 +33,12 @@ const Charities = () => {
                 </Link>
               </Button>
             </div>
-            <Button variant="outline">View All</Button>
+            <Button 
+              variant="outline" 
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? "Show Less" : "View All"}
+            </Button>
           </div>
 
           <div className="mb-12 text-center max-w-3xl mx-auto">
@@ -33,17 +50,63 @@ const Charities = () => {
               Every donation counts towards creating positive change.
             </p>
             <div className="flex justify-center gap-4 mb-8">
-              <Button size="lg" className="text-lg px-8">Start Donating</Button>
-              <Button size="lg" variant="outline" className="text-lg px-8">Learn More</Button>
+              <Button 
+                size="lg" 
+                className="text-lg px-8" 
+                asChild
+              >
+                <Link to="#campaigns">
+                  Start Donating
+                </Link>
+              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="lg" variant="outline" className="text-lg px-8">
+                    <Info className="mr-2 h-4 w-4" />
+                    Learn More
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>About Our Charity Platform</DialogTitle>
+                    <DialogDescription className="pt-4 space-y-4">
+                      <p>
+                        Our platform connects donors directly with verified charitable causes using blockchain technology. 
+                        Every donation is transparent and traceable, ensuring your contribution makes the maximum impact.
+                      </p>
+                      <p>
+                        We support various causes including education, healthcare, environmental conservation, 
+                        arts & culture, food security, and technology access initiatives.
+                      </p>
+                      <p>
+                        All charities on our platform are thoroughly vetted and operate with full transparency. 
+                        You can track your donations and see their direct impact on the causes you support.
+                      </p>
+                      <div className="flex justify-end">
+                        <Button asChild>
+                          <a 
+                            href="https://docs.charityledger.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2"
+                          >
+                            Learn More <ExternalLink className="h-4 w-4" />
+                          </a>
+                        </Button>
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
       </div>
 
       {/* Campaigns Grid */}
-      <div className="container mx-auto px-4 py-16">
+      <div id="campaigns" className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {campaigns.map((campaign) => (
+          {displayedCampaigns.map((campaign) => (
             <Card key={campaign.id} className="group flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl">
               <div className="relative overflow-hidden">
                 <img
