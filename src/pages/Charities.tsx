@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -98,6 +97,121 @@ const Charities = () => {
                   </DialogHeader>
                 </DialogContent>
               </Dialog>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Fast Donation Section */}
+      <div className="bg-white py-16 border-y border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">
+                Fast Donation with <span className="text-primary">Charity Ledger</span>
+              </h2>
+              <div className="space-y-4 text-gray-600">
+                <p className="text-lg">
+                  Trust us to manage your donations effectively. We accept over 70 cryptocurrencies
+                  and ensure your contribution reaches those who need it most.
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <div className="rounded-full p-1 bg-primary/10 text-primary mt-1">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    Automatic funds distribution to verified charities
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="rounded-full p-1 bg-primary/10 text-primary mt-1">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    Support multiple causes with a single transaction
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="rounded-full p-1 bg-primary/10 text-primary mt-1">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    Complete transparency with blockchain tracking
+                  </li>
+                </ul>
+              </div>
+              <div className="mt-8 space-y-4">
+                <div className="flex items-center gap-4 flex-wrap">
+                  <Button size="lg" className="text-lg gap-2">
+                    <img src="/btc-logo.svg" alt="BTC" className="w-5 h-5" />
+                    BTC
+                  </Button>
+                  <Button size="lg" className="text-lg gap-2">
+                    <img src="/eth-logo.svg" alt="ETH" className="w-5 h-5" />
+                    ETH
+                  </Button>
+                  <Button size="lg" className="text-lg gap-2">
+                    <img src="/usdc-logo.svg" alt="USDC" className="w-5 h-5" />
+                    USDC
+                  </Button>
+                  <Button size="lg" variant="outline" className="text-lg">
+                    +67 more
+                  </Button>
+                </div>
+                <p className="text-sm text-gray-500">
+                  Minimum donation: 0.001 BTC / 0.01 ETH / 10 USDC
+                </p>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8">
+              <div className="space-y-6">
+                <div>
+                  <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
+                    Donation Amount
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      id="amount"
+                      className="block w-full rounded-lg border-gray-300 pl-4 pr-20 focus:border-primary focus:ring-primary sm:text-sm"
+                      placeholder="Enter amount"
+                    />
+                    <div className="absolute inset-y-0 right-0 flex items-center">
+                      <select
+                        className="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-primary focus:ring-primary sm:text-sm"
+                      >
+                        <option>USDC</option>
+                        <option>BTC</option>
+                        <option>ETH</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="impact-area" className="block text-sm font-medium text-gray-700 mb-1">
+                    Select Impact Area (Optional)
+                  </label>
+                  <select
+                    id="impact-area"
+                    className="block w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary sm:text-sm"
+                  >
+                    <option value="">Let Charity Ledger decide</option>
+                    <option value="urgent">Most Urgent Needs</option>
+                    <option value="education">Education</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="environment">Environment</option>
+                  </select>
+                </div>
+                <Button className="w-full text-lg py-6" size="lg">
+                  Make Fast Donation
+                </Button>
+                <p className="text-xs text-gray-500 text-center">
+                  Your donation will be distributed based on our impact assessment
+                  and urgent needs across verified charitable organizations.
+                </p>
+              </div>
             </div>
           </div>
         </div>
