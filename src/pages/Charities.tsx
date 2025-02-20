@@ -145,23 +145,48 @@ const Charities = () => {
               <div className="mt-8 space-y-4">
                 <div className="flex items-center gap-4 flex-wrap">
                   <Button size="lg" className="text-lg gap-2">
-                    <img src="/btc-logo.svg" alt="BTC" className="w-5 h-5" />
-                    BTC
-                  </Button>
-                  <Button size="lg" className="text-lg gap-2">
-                    <img src="/eth-logo.svg" alt="ETH" className="w-5 h-5" />
-                    ETH
-                  </Button>
-                  <Button size="lg" className="text-lg gap-2">
-                    <img src="/usdc-logo.svg" alt="USDC" className="w-5 h-5" />
+                    <img 
+                      src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png" 
+                      alt="USDC" 
+                      className="w-5 h-5"
+                    />
                     USDC
                   </Button>
-                  <Button size="lg" variant="outline" className="text-lg">
-                    +67 more
+                  <Button size="lg" className="text-lg gap-2">
+                    <img 
+                      src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png" 
+                      alt="USDT" 
+                      className="w-5 h-5"
+                    />
+                    USDT
+                  </Button>
+                  <Button size="lg" className="text-lg gap-2">
+                    <img 
+                      src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/solana/info/logo.png" 
+                      alt="SOL" 
+                      className="w-5 h-5"
+                    />
+                    SOL
+                  </Button>
+                  <Button size="lg" className="text-lg gap-2">
+                    <img 
+                      src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/arbitrum/info/logo.png" 
+                      alt="ARB" 
+                      className="w-5 h-5"
+                    />
+                    ARB
+                  </Button>
+                  <Button size="lg" className="text-lg gap-2">
+                    <img 
+                      src="https://jup.ag/favicon.ico" 
+                      alt="JUP" 
+                      className="w-5 h-5"
+                    />
+                    JUP
                   </Button>
                 </div>
                 <p className="text-sm text-gray-500">
-                  Minimum donation: 0.001 BTC / 0.01 ETH / 10 USDC
+                  Minimum donation: 10 USDC / 10 USDT / 0.1 SOL / 10 ARB / 100 JUP
                 </p>
               </div>
             </div>

@@ -132,7 +132,7 @@ export const Navbar = () => {
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => handleWalletConnect('phantom')}>
                   <img 
-                    src="https://www.phantom.app/img/phantom-logo.png" 
+                    src="https://raw.githubusercontent.com/phantom-labs/phantom-logo/master/phantom-icon-purple.png" 
                     alt="Phantom" 
                     className="w-4 h-4 mr-2"
                   />
@@ -140,7 +140,7 @@ export const Navbar = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleWalletConnect('solflare')}>
                   <img 
-                    src="https://solflare.com/logo.png" 
+                    src="https://raw.githubusercontent.com/solflare-wallet/solflare-logos/master/light/solflare-logo-light.svg" 
                     alt="Solflare" 
                     className="w-4 h-4 mr-2"
                   />
@@ -217,7 +217,7 @@ export const Navbar = () => {
                 <DropdownMenuContent align="end" className="w-[calc(100vw-2rem)] sm:w-auto">
                   <DropdownMenuItem onClick={() => handleWalletConnect('phantom')}>
                     <img 
-                      src="https://www.phantom.app/img/phantom-logo.png" 
+                      src="https://raw.githubusercontent.com/phantom-labs/phantom-logo/master/phantom-icon-purple.png" 
                       alt="Phantom" 
                       className="w-4 h-4 mr-2"
                     />
@@ -225,7 +225,7 @@ export const Navbar = () => {
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => handleWalletConnect('solflare')}>
                     <img 
-                      src="https://solflare.com/logo.png" 
+                      src="https://raw.githubusercontent.com/solflare-wallet/solflare-logos/master/light/solflare-logo-light.svg" 
                       alt="Solflare" 
                       className="w-4 h-4 mr-2"
                     />
