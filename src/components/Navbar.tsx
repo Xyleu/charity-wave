@@ -4,27 +4,32 @@ import { Link } from "react-router-dom";
 import { Wallet, ChevronDown, Menu, X, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import {
-  PhantomWalletAdapter
-} from "@solana/wallet-adapter-phantom";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+import { SolflareWalletAdapter } from "@solana/wallet-adapter-solflare";
 import { Connection } from "@solana/web3.js";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { toast } = useToast();
   const [isWalletConnected, setIsWalletConnected] = useState(false);
-  const [walletAdapter, setWalletAdapter] = useState<PhantomWalletAdapter | null>(null);
+  const [phantomWallet, setPhantomWallet] = useState<PhantomWalletAdapter | null>(null);
+  const [solflareWallet, setSolflareWallet] = useState<SolflareWalletAdapter | null>(null);
+  const [selectedWallet, setSelectedWallet] = useState<'phantom' | 'solflare' | null>(null);
 
   useEffect(() => {
-    const adapter = new PhantomWalletAdapter();
-    setWalletAdapter(adapter);
+    const phantomAdapter = new PhantomWalletAdapter();
+    const solflareAdapter = new SolflareWalletAdapter();
+    setPhantomWallet(phantomAdapter);
+    setSolflareWallet(solflareAdapter);
   }, []);
 
-  const handleWalletConnect = async () => {
-    if (!walletAdapter) {
+  const handleWalletConnect = async (walletType: 'phantom' | 'solflare') => {
+    const wallet = walletType === 'phantom' ? phantomWallet : solflareWallet;
+
+    if (!wallet) {
       toast({
         title: "Wallet Error",
-        description: "Please install Phantom wallet",
+        description: `Please install ${walletType === 'phantom' ? 'Phantom' : 'Solflare'} wallet`,
         variant: "destructive",
       });
       return;
@@ -32,17 +37,19 @@ export const Navbar = () => {
 
     try {
       if (!isWalletConnected) {
-        await walletAdapter.connect();
+        await wallet.connect();
         const connection = new Connection("https://api.mainnet-beta.solana.com");
         
         setIsWalletConnected(true);
+        setSelectedWallet(walletType);
         toast({
           title: "Wallet Connected",
           description: "Your wallet has been connected successfully",
         });
       } else {
-        await walletAdapter.disconnect();
+        await wallet.disconnect();
         setIsWalletConnected(false);
+        setSelectedWallet(null);
         toast({
           title: "Wallet Disconnected",
           description: "Your wallet has been disconnected",
@@ -110,15 +117,24 @@ export const Navbar = () => {
               </a>
             </div>
 
-            <Button
-              variant="outline"
-              className="flex items-center space-x-2"
-              onClick={handleWalletConnect}
-            >
-              <Wallet size={16} />
-              <span>{isWalletConnected ? "Connected" : "Connect Wallet"}</span>
-              <ChevronDown size={16} />
-            </Button>
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="outline"
+                className="flex items-center space-x-2"
+                onClick={() => handleWalletConnect('phantom')}
+              >
+                <Wallet size={16} />
+                <span>Phantom</span>
+              </Button>
+              <Button
+                variant="outline"
+                className="flex items-center space-x-2"
+                onClick={() => handleWalletConnect('solflare')}
+              >
+                <Wallet size={16} />
+                <span>Solflare</span>
+              </Button>
+            </div>
           </div>
 
           <button className="md:hidden" onClick={toggleMenu}>
@@ -180,12 +196,19 @@ export const Navbar = () => {
 
               <Button
                 variant="outline"
-                className="flex items-center space-x-2 w-full justify-center"
-                onClick={handleWalletConnect}
+                className="w-full justify-center"
+                onClick={() => handleWalletConnect('phantom')}
               >
-                <Wallet size={16} />
-                <span>{isWalletConnected ? "Connected" : "Connect Wallet"}</span>
-                <ChevronDown size={16} />
+                <Wallet size={16} className="mr-2" />
+                <span>Connect Phantom</span>
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full justify-center"
+                onClick={() => handleWalletConnect('solflare')}
+              >
+                <Wallet size={16} className="mr-2" />
+                <span>Connect Solflare</span>
               </Button>
             </div>
           </div>
