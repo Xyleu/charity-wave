@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Wallet, ChevronDown, Menu, X, Mail, MessageCircle } from "lucide-react";
@@ -7,6 +6,12 @@ import { useToast } from "@/components/ui/use-toast";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
 import { SolflareWalletAdapter } from "@solana/wallet-adapter-solflare";
 import { Connection } from "@solana/web3.js";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -83,7 +88,6 @@ export const Navbar = () => {
               Leaderboard
             </Link>
             
-            {/* Social Links */}
             <div className="flex items-center space-x-4">
               <a
                 href="mailto:contact@charityledger.com"
@@ -117,24 +121,33 @@ export const Navbar = () => {
               </a>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <Button
-                variant="outline"
-                className="flex items-center space-x-2"
-                onClick={() => handleWalletConnect('phantom')}
-              >
-                <Wallet size={16} />
-                <span>Phantom</span>
-              </Button>
-              <Button
-                variant="outline"
-                className="flex items-center space-x-2"
-                onClick={() => handleWalletConnect('solflare')}
-              >
-                <Wallet size={16} />
-                <span>Solflare</span>
-              </Button>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <Wallet size={16} />
+                  <span>{isWalletConnected ? 'Connected' : 'Connect Wallet'}</span>
+                  <ChevronDown size={16} />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => handleWalletConnect('phantom')}>
+                  <img 
+                    src="https://www.phantom.app/img/phantom-logo.png" 
+                    alt="Phantom" 
+                    className="w-4 h-4 mr-2"
+                  />
+                  Phantom Wallet
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleWalletConnect('solflare')}>
+                  <img 
+                    src="https://solflare.com/logo.png" 
+                    alt="Solflare" 
+                    className="w-4 h-4 mr-2"
+                  />
+                  Solflare Wallet
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           <button className="md:hidden" onClick={toggleMenu}>
@@ -160,7 +173,6 @@ export const Navbar = () => {
                 Leaderboard
               </Link>
               
-              {/* Mobile Social Links */}
               <div className="flex items-center space-x-4 py-2">
                 <a
                   href="mailto:contact@charityledger.com"
@@ -194,22 +206,33 @@ export const Navbar = () => {
                 </a>
               </div>
 
-              <Button
-                variant="outline"
-                className="w-full justify-center"
-                onClick={() => handleWalletConnect('phantom')}
-              >
-                <Wallet size={16} className="mr-2" />
-                <span>Connect Phantom</span>
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-center"
-                onClick={() => handleWalletConnect('solflare')}
-              >
-                <Wallet size={16} className="mr-2" />
-                <span>Connect Solflare</span>
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="w-full justify-center">
+                    <Wallet size={16} className="mr-2" />
+                    <span>{isWalletConnected ? 'Connected' : 'Connect Wallet'}</span>
+                    <ChevronDown size={16} className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-[calc(100vw-2rem)] sm:w-auto">
+                  <DropdownMenuItem onClick={() => handleWalletConnect('phantom')}>
+                    <img 
+                      src="https://www.phantom.app/img/phantom-logo.png" 
+                      alt="Phantom" 
+                      className="w-4 h-4 mr-2"
+                    />
+                    Phantom Wallet
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleWalletConnect('solflare')}>
+                    <img 
+                      src="https://solflare.com/logo.png" 
+                      alt="Solflare" 
+                      className="w-4 h-4 mr-2"
+                    />
+                    Solflare Wallet
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         )}
