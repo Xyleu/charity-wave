@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -21,7 +20,6 @@ type CryptoOption = {
   symbol: string;
   name: string;
   logo: string;
-  minAmount: number;
   decimals: number;
 };
 
@@ -30,35 +28,30 @@ const cryptoOptions: CryptoOption[] = [
     symbol: "USDC",
     name: "USD Coin",
     logo: "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png",
-    minAmount: 10,
     decimals: 6,
   },
   {
     symbol: "USDT",
     name: "Tether",
     logo: "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png",
-    minAmount: 10,
     decimals: 6,
   },
   {
     symbol: "SOL",
     name: "Solana",
     logo: "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/solana/info/logo.png",
-    minAmount: 0.1,
     decimals: 9,
   },
   {
     symbol: "ARB",
     name: "Arbitrum",
     logo: "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/arbitrum/info/logo.png",
-    minAmount: 10,
     decimals: 18,
   },
   {
     symbol: "JUP",
     name: "Jupiter",
     logo: "https://jup.ag/favicon.ico",
-    minAmount: 100,
     decimals: 6,
   },
 ];
@@ -73,8 +66,8 @@ const Charities = () => {
     try {
       const amount = parseFloat(donationAmount);
       
-      if (isNaN(amount) || amount < selectedCrypto.minAmount) {
-        toast.error(`Minimum donation amount is ${selectedCrypto.minAmount} ${selectedCrypto.symbol}`);
+      if (isNaN(amount) || amount <= 0) {
+        toast.error("Please enter a valid amount");
         return;
       }
 
@@ -135,12 +128,6 @@ const Charities = () => {
                 </Link>
               </Button>
             </div>
-            <Button 
-              variant="outline" 
-              onClick={() => setShowAll(!showAll)}
-            >
-              {showAll ? "Show Less" : "View All"}
-            </Button>
           </div>
 
           <div className="mb-12 text-center max-w-3xl mx-auto">
@@ -155,11 +142,11 @@ const Charities = () => {
               <Button 
                 size="lg" 
                 className="text-lg px-8" 
-                asChild
+                onClick={() => {
+                  document.getElementById('campaigns')?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
-                <Link to="#campaigns">
-                  Start Donating
-                </Link>
+                Start Donating
               </Button>
               <Dialog>
                 <DialogTrigger asChild>
@@ -245,7 +232,7 @@ const Charities = () => {
                   </li>
                 </ul>
               </div>
-              <div className="mt-8 space-y-4">
+              <div className="mt-8">
                 <div className="flex items-center gap-4 flex-wrap">
                   {cryptoOptions.map((crypto) => (
                     <Button 
@@ -264,9 +251,6 @@ const Charities = () => {
                     </Button>
                   ))}
                 </div>
-                <p className="text-sm text-gray-500">
-                  Minimum donation: 10 USDC / 10 USDT / 0.1 SOL / 10 ARB / 100 JUP
-                </p>
               </div>
             </div>
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8">
@@ -281,10 +265,9 @@ const Charities = () => {
                       id="amount"
                       value={donationAmount}
                       onChange={(e) => setDonationAmount(e.target.value)}
-                      min={selectedCrypto.minAmount}
                       step="any"
                       className="block w-full rounded-lg border-gray-300 pl-4 pr-20 focus:border-primary focus:ring-primary sm:text-sm"
-                      placeholder={`Min ${selectedCrypto.minAmount}`}
+                      placeholder="Enter amount"
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center">
                       <select
@@ -335,6 +318,14 @@ const Charities = () => {
 
       {/* Campaigns Grid */}
       <div id="campaigns" className="container mx-auto px-4 py-16">
+        <div className="flex justify-end mb-8">
+          <Button 
+            variant="outline" 
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "Show Less" : "View All"}
+          </Button>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedCampaigns.map((campaign) => (
             <Card key={campaign.id} className="group flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl">
