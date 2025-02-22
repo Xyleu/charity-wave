@@ -1,5 +1,5 @@
 
-import { Heart, Book, Tree, Hospital, Laptop, PiggyBank, Baby, Music } from "lucide-react";
+import { Heart, Book, Trees, Hospital, Laptop, PiggyBank, Baby, Music } from "lucide-react";
 import { ReactElement } from "react";
 
 export type Category = "Healthcare" | "Education" | "Environment" | "Technology" | "Children" | "Arts" | "Emergency" | "Financial";
@@ -45,7 +45,7 @@ export const campaigns: Campaign[] = [
     description: "Planting trees and restoring ecosystems in threatened areas.",
     image: "/placeholder.svg",
     category: "Environment",
-    icon: <Tree className="h-4 w-4" />,
+    icon: <Trees className="h-4 w-4" />,
     target: 80,
     collected: 60,
     daysLeft: 25
@@ -111,7 +111,7 @@ export const campaigns: Campaign[] = [
     description: "Providing clean water access to rural communities.",
     image: "/placeholder.svg",
     category: "Environment",
-    icon: <Tree className="h-4 w-4" />,
+    icon: <Trees className="h-4 w-4" />,
     target: 110,
     collected: 85,
     daysLeft: 32

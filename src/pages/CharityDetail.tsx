@@ -76,14 +76,14 @@ const CharityDetail = () => {
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
                       <div>
-                        <h3 className="font-medium">Wallet Address</h3>
-                        <p className="text-sm text-gray-600">{campaign.address}</p>
+                        <h3 className="font-medium">Wallet Info</h3>
+                        <p className="text-sm text-gray-600">Donations are managed through a secure multi-sig wallet</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <Button className="w-full py-6 text-lg" size="lg" data-address={campaign.address}>
+                <Button className="w-full py-6 text-lg" size="lg">
                   Donate Now
                 </Button>
               </div>
