@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Charities from "./pages/Charities";
 import Leaderboard from "./pages/Leaderboard";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,7 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/charities" element={<Charities />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/dashboard" element={<NotFound />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
