@@ -1,4 +1,5 @@
-import { Heart, Trophy, Users } from "lucide-react";
+
+import { Heart, Trophy, Users, Discord, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -150,35 +151,35 @@ const Index = () => {
       </section>
 
       {/* Social Links */}
-      <footer className="py-12 bg-white/50 backdrop-blur-sm">
+      <footer className="py-12 bg-primary/10">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center space-y-6">
             <h3 className="text-2xl font-semibold text-gray-900">Connect With Us</h3>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-8">
               <a 
                 href="https://discord.gg/charityledger" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
+                className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors bg-white px-6 py-3 rounded-full shadow-sm hover:shadow-md"
               >
-                <img src="/discord.svg" alt="Discord" className="w-6 h-6" />
-                <span>Discord</span>
+                <Discord className="w-5 h-5" />
+                <span className="font-medium">Discord</span>
               </a>
               <a 
                 href="https://t.me/charityledger" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
+                className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors bg-white px-6 py-3 rounded-full shadow-sm hover:shadow-md"
               >
-                <img src="/telegram.svg" alt="Telegram" className="w-6 h-6" />
-                <span>Telegram</span>
+                <MessageCircle className="w-5 h-5" />
+                <span className="font-medium">Telegram</span>
               </a>
               <a 
                 href="mailto:contact@charityledger.org"
-                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
+                className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors bg-white px-6 py-3 rounded-full shadow-sm hover:shadow-md"
               >
-                <img src="/email.svg" alt="Email" className="w-6 h-6" />
-                <span>Email</span>
+                <Mail className="w-5 h-5" />
+                <span className="font-medium">Email</span>
               </a>
             </div>
           </div>

@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { Trophy, Users, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -13,31 +14,31 @@ interface Donor {
   donations: number;
 }
 
-const topDonors: Donor[] = [
-  { 
-    rank: 1, 
-    walletAddress: "8xzt3dYRuqXxRF6Nz9uDv9o3YKBGFkWQvJxwvPYMxvCr", 
-    amount: 15000, 
-    donations: 42
-  },
-  { 
-    rank: 2, 
-    walletAddress: "9mnbHHRBKXV7ovp4WzAEAuWykqPPgYb4E7VeyJ3Jh4s9", 
-    amount: 12500, 
-    donations: 38
-  },
-  { 
-    rank: 3, 
-    walletAddress: "4vfrDHS2QaZX2P9XtJ2P9xGYaE2Vwp2MQKLZKGyCkjx5", 
-    amount: 10000, 
-    donations: 35
-  },
+const allDonors: Donor[] = [
+  { rank: 1, walletAddress: "8xzt3dYRuqXxRF6Nz9uDv9o3YKBGFkWQvJxwvPYMxvCr", amount: 15000, donations: 42 },
+  { rank: 2, walletAddress: "9mnbHHRBKXV7ovp4WzAEAuWykqPPgYb4E7VeyJ3Jh4s9", amount: 12500, donations: 38 },
+  { rank: 3, walletAddress: "4vfrDHS2QaZX2P9XtJ2P9xGYaE2Vwp2MQKLZKGyCkjx5", amount: 10000, donations: 35 },
+  { rank: 4, walletAddress: "7LkYvqozNwip9Ry6p3rNKUYVwKtG1ZvFrNxGR5ahXuhK", amount: 9500, donations: 31 },
+  { rank: 5, walletAddress: "2YmFmqYB2xF9YQeqRQvkJqRGjwEBXXeRmEGUt8xo6bHy", amount: 8800, donations: 29 },
+  { rank: 6, walletAddress: "5nQPzKvHGqJxGY9Z7P9NvyQJJZZvTJ1dKp2qVv1XuZ8r", amount: 8200, donations: 27 },
+  { rank: 7, walletAddress: "3vKjNqZqXwE8yFtXv5Y9p1RmZJ7LgXEeKzD2q6vW4tBs", amount: 7500, donations: 25 },
+  { rank: 8, walletAddress: "6mHnWxKvD8JpGYz9R4Q2NkBqXy1ZrVw3eKcL5tYfXuPm", amount: 7000, donations: 23 },
+  { rank: 9, walletAddress: "1bPzMwQyX5NvJrKg8tRfY6L2eHnD9ZqUaVw4k3mS7Ens", amount: 6500, donations: 21 },
+  { rank: 10, walletAddress: "9aKvNwE8mX5YpRqZ2tBf3L6Q4cJ7DnWx1KgM6vS8hGjr", amount: 6000, donations: 19 },
+  { rank: 11, walletAddress: "4kLmNxE8pY5ZqRtBf3L6Q4cJ7DnWx1KgM6vS8hGjr9aK", amount: 5500, donations: 18 },
+  { rank: 12, walletAddress: "2vS8hGjr9aKvNwE8mX5YpRqZ2tBf3L6Q4cJ7DnWx1KgM", amount: 5000, donations: 17 },
+  { rank: 13, walletAddress: "7DnWx1KgM6vS8hGjr9aKvNwE8mX5YpRqZ2tBf3L6Q4cJ", amount: 4500, donations: 16 },
+  { rank: 14, walletAddress: "5YpRqZ2tBf3L6Q4cJ7DnWx1KgM6vS8hGjr9aKvNwE8mX", amount: 4000, donations: 15 },
+  { rank: 15, walletAddress: "8hGjr9aKvNwE8mX5YpRqZ2tBf3L6Q4cJ7DnWx1KgM6vS", amount: 3500, donations: 14 }
 ];
 
 const Leaderboard = () => {
+  const [showAllDonors, setShowAllDonors] = useState(false);
   const shortenAddress = (address: string) => {
     return `${address.slice(0, 4)}...${address.slice(-4)}`;
   };
+
+  const displayedDonors = showAllDonors ? allDonors : allDonors.slice(0, 10);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -76,7 +77,7 @@ const Leaderboard = () => {
         {/* Top Donors */}
         <div className="space-y-8">
           <h2 className="text-3xl font-bold text-center mb-12">Top Donors</h2>
-          {topDonors.map((donor) => (
+          {displayedDonors.map((donor) => (
             <Card key={donor.rank} className="p-8">
               <div className="flex items-center gap-8">
                 <div className="w-20 h-20 relative">
@@ -106,6 +107,17 @@ const Leaderboard = () => {
               </div>
             </Card>
           ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => setShowAllDonors(!showAllDonors)}
+            className="mx-auto"
+          >
+            {showAllDonors ? "Show Less" : "View All"}
+          </Button>
         </div>
 
         <div className="text-center mt-16">
