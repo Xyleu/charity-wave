@@ -1,5 +1,5 @@
 
-import { Heart, Trophy, Users, Discord, Mail, MessageCircle } from "lucide-react";
+import { Heart, Trophy, Users, Mail, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -162,7 +162,7 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors bg-white px-6 py-3 rounded-full shadow-sm hover:shadow-md"
               >
-                <Discord className="w-5 h-5" />
+                <MessageCircle className="w-5 h-5" />
                 <span className="font-medium">Discord</span>
               </a>
               <a 
