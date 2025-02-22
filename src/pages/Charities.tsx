@@ -3,15 +3,9 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Info, ExternalLink } from "lucide-react";
-import { campaigns } from "@/data/campaigns";
-import { 
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { campaigns, Category, getCategories } from "@/data/campaigns";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Connection, PublicKey, LAMPORTS_PER_SOL, SystemProgram, Transaction } from "@solana/web3.js";
@@ -60,7 +54,15 @@ const Charities = () => {
   const [showAll, setShowAll] = useState(false);
   const [donationAmount, setDonationAmount] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(cryptoOptions[0]);
-  const displayedCampaigns = showAll ? campaigns : campaigns.slice(0, 6);
+  const [selectedCategory, setSelectedCategory] = useState<Category | "all">("all");
+
+  const categories = getCategories();
+  
+  const filteredCampaigns = selectedCategory === "all" 
+    ? campaigns 
+    : campaigns.filter(campaign => campaign.category === selectedCategory);
+
+  const displayedCampaigns = showAll ? filteredCampaigns : filteredCampaigns.slice(0, 6);
 
   const handleFastDonation = async () => {
     try {
@@ -318,14 +320,38 @@ const Charities = () => {
 
       {/* Campaigns Grid */}
       <div id="campaigns" className="container mx-auto px-4 py-16">
-        <div className="flex justify-end mb-8">
-          <Button 
-            variant="outline" 
-            onClick={() => setShowAll(!showAll)}
-          >
-            {showAll ? "Show Less" : "View All"}
-          </Button>
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-3xl font-bold">Our Campaigns</h2>
+            <Button 
+              variant="outline" 
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? "Show Less" : "View All"}
+            </Button>
+          </div>
+          
+          <Tabs defaultValue="all" className="w-full">
+            <TabsList className="flex flex-wrap gap-2">
+              <TabsTrigger 
+                value="all" 
+                onClick={() => setSelectedCategory("all")}
+              >
+                All Campaigns
+              </TabsTrigger>
+              {categories.map((category) => (
+                <TabsTrigger 
+                  key={category} 
+                  value={category}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedCampaigns.map((campaign) => (
             <Card key={campaign.id} className="group flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl">
