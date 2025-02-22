@@ -1,23 +1,42 @@
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ChevronDown, Menu, Wallet, X } from "lucide-react";
+import { toast } from "sonner";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleWalletConnect = async (walletName: string) => {
     try {
       // Here we would implement actual wallet connection logic
       setIsWalletConnected(true);
+      localStorage.setItem('walletConnected', 'true');
+      toast.success("Wallet connected successfully!");
     } catch (error) {
       console.error("Error connecting wallet:", error);
+      toast.error("Failed to connect wallet");
     }
   };
+
+  const handleDashboardClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!isWalletConnected) {
+      e.preventDefault();
+      toast.error("Please connect your wallet to access the dashboard");
+    }
+  };
+
+  useEffect(() => {
+    const walletConnected = localStorage.getItem('walletConnected');
+    if (walletConnected === 'true') {
+      setIsWalletConnected(true);
+    }
+  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -50,6 +69,7 @@ export const Navbar = () => {
             </Link>
             <Link
               to="/dashboard"
+              onClick={handleDashboardClick}
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 location.pathname === "/dashboard" ? "text-primary" : "text-gray-600"
               }`}
@@ -114,6 +134,7 @@ export const Navbar = () => {
             </Link>
             <Link
               to="/dashboard"
+              onClick={handleDashboardClick}
               className="block px-4 py-2 text-sm hover:bg-gray-100 rounded-lg"
             >
               Dashboard

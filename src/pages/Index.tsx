@@ -1,4 +1,3 @@
-
 import { Heart, Trophy, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -149,6 +148,42 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Social Links */}
+      <footer className="py-12 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center space-y-6">
+            <h3 className="text-2xl font-semibold text-gray-900">Connect With Us</h3>
+            <div className="flex flex-wrap justify-center gap-6">
+              <a 
+                href="https://discord.gg/charityledger" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
+              >
+                <img src="/discord.svg" alt="Discord" className="w-6 h-6" />
+                <span>Discord</span>
+              </a>
+              <a 
+                href="https://t.me/charityledger" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
+              >
+                <img src="/telegram.svg" alt="Telegram" className="w-6 h-6" />
+                <span>Telegram</span>
+              </a>
+              <a 
+                href="mailto:contact@charityledger.org"
+                className="flex items-center space-x-2 text-gray-600 hover:text-primary transition-colors"
+              >
+                <img src="/email.svg" alt="Email" className="w-6 h-6" />
+                <span>Email</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
