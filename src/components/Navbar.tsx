@@ -9,18 +9,47 @@ import { toast } from "sonner";
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleWalletConnect = async (walletName: string) => {
     try {
-      // Here we would implement actual wallet connection logic
+      // In a real app, this would connect to the actual wallet
+      // For now, we'll simulate with a mock address
+      const mockAddress = walletName === 'phantom' 
+        ? "AoS7rRf1fRSSBSJKvT82zLGqSvP1RCcX1TJwGgMJ16Qb" 
+        : "BPxEQmGfxdWEjWdnsxXXfEgSs8X2s2sgXzNcGKF3Kh2b";
+      
+      setWalletAddress(mockAddress);
       setIsWalletConnected(true);
+      
+      // Store in localStorage for persistence
       localStorage.setItem('walletConnected', 'true');
-      toast.success("Wallet connected successfully!");
+      localStorage.setItem('walletAddress', mockAddress);
+      
+      toast.success(`${walletName.charAt(0).toUpperCase() + walletName.slice(1)} wallet connected successfully!`);
+      
+      // If user is trying to access dashboard, navigate there
+      if (location.pathname === "/dashboard") {
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error("Error connecting wallet:", error);
       toast.error("Failed to connect wallet");
+    }
+  };
+
+  const handleDisconnectWallet = () => {
+    setIsWalletConnected(false);
+    setWalletAddress("");
+    localStorage.removeItem('walletConnected');
+    localStorage.removeItem('walletAddress');
+    toast.info("Wallet disconnected");
+    
+    // If user is on dashboard, redirect to home
+    if (location.pathname === "/dashboard") {
+      navigate("/");
     }
   };
 
@@ -33,8 +62,11 @@ export const Navbar = () => {
 
   useEffect(() => {
     const walletConnected = localStorage.getItem('walletConnected');
-    if (walletConnected === 'true') {
+    const storedAddress = localStorage.getItem('walletAddress');
+    
+    if (walletConnected === 'true' && storedAddress) {
       setIsWalletConnected(true);
+      setWalletAddress(storedAddress);
     }
   }, []);
 
@@ -78,33 +110,41 @@ export const Navbar = () => {
             </Link>
           </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="flex items-center space-x-2">
-                <Wallet size={16} />
-                <span>{isWalletConnected ? 'Connected' : 'Connect Wallet'}</span>
-                <ChevronDown size={16} />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => handleWalletConnect('phantom')}>
-                <img 
-                  src="https://raw.githubusercontent.com/phantom-labs/phantom-logo/master/phantom-icon-purple.png" 
-                  alt="Phantom" 
-                  className="w-4 h-4 mr-2"
-                />
-                Phantom Wallet
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleWalletConnect('solflare')}>
-                <img 
-                  src="https://raw.githubusercontent.com/solflare-wallet/solflare-logos/master/light/solflare-logo-light.svg" 
-                  alt="Solflare" 
-                  className="w-4 h-4 mr-2"
-                />
-                Solflare Wallet
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {isWalletConnected ? (
+            <Button variant="outline" className="flex items-center space-x-2" onClick={handleDisconnectWallet}>
+              <Wallet size={16} />
+              <span className="max-w-32 truncate">{walletAddress.slice(0, 4)}...{walletAddress.slice(-4)}</span>
+              <X size={16} />
+            </Button>
+          ) : (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="flex items-center space-x-2">
+                  <Wallet size={16} />
+                  <span>Connect Wallet</span>
+                  <ChevronDown size={16} />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => handleWalletConnect('phantom')}>
+                  <img 
+                    src="https://raw.githubusercontent.com/phantom-labs/phantom-logo/master/phantom-icon-purple.png" 
+                    alt="Phantom" 
+                    className="w-4 h-4 mr-2"
+                  />
+                  Phantom Wallet
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleWalletConnect('solflare')}>
+                  <img 
+                    src="https://raw.githubusercontent.com/solflare-wallet/solflare-logos/master/light/solflare-logo-light.svg" 
+                    alt="Solflare" 
+                    className="w-4 h-4 mr-2"
+                  />
+                  Solflare Wallet
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
 
           <button
             className="md:hidden"
