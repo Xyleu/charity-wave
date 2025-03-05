@@ -1,11 +1,14 @@
 
-import { Heart, Trophy, Users, Mail, MessageCircle } from "lucide-react";
+import { Heart, Trophy, Users, Mail, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Navbar } from "@/components/Navbar";
 import { Link } from "react-router-dom";
 import { campaigns } from "@/data/campaigns";
+
+// Import Discord and Telegram icons from lucide-react
+import { Discord, Telegram } from "lucide-react";
 
 const Index = () => {
   return (
@@ -32,6 +35,19 @@ const Index = () => {
                 <Link to="/leaderboard">View Impact</Link>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Total Donations Display */}
+      <section className="py-8 bg-primary/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <h2 className="text-2xl md:text-3xl font-bold">
+              <span className="text-primary">Charity Ledger</span> has raised a total of
+              <span className="text-primary ml-2">$1,248,750</span> in donations
+            </h2>
+            <p className="text-gray-600 mt-2">Thanks to our generous community of donors</p>
           </div>
         </div>
       </section>
@@ -162,7 +178,7 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors bg-white px-6 py-3 rounded-full shadow-sm hover:shadow-md"
               >
-                <MessageCircle className="w-5 h-5" />
+                <Discord className="w-5 h-5" />
                 <span className="font-medium">Discord</span>
               </a>
               <a 
@@ -171,7 +187,7 @@ const Index = () => {
                 rel="noopener noreferrer"
                 className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors bg-white px-6 py-3 rounded-full shadow-sm hover:shadow-md"
               >
-                <MessageCircle className="w-5 h-5" />
+                <Telegram className="w-5 h-5" />
                 <span className="font-medium">Telegram</span>
               </a>
               <a 

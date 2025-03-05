@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Menu, Wallet, X, FileHeart } from "lucide-react";
+import { ChevronDown, Menu, Wallet, X } from "lucide-react";
 import { toast } from "sonner";
 
 export const Navbar = () => {
@@ -86,21 +86,10 @@ export const Navbar = () => {
             <Link
               to="/charities"
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname === "/charities" ? "text-primary" : "text-gray-600"
+                location.pathname === "/charities" || location.pathname.includes("/charity-page") ? "text-primary" : "text-gray-600"
               }`}
             >
               Donate
-            </Link>
-            <Link
-              to="/charity-pages"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname.includes("/charity-page") ? "text-primary" : "text-gray-600"
-              }`}
-            >
-              <span className="flex items-center">
-                <FileHeart className="mr-1 h-4 w-4" />
-                Charity Pages
-              </span>
             </Link>
             <Link
               to="/leaderboard"
@@ -176,13 +165,6 @@ export const Navbar = () => {
               className="block px-4 py-2 text-sm hover:bg-gray-100 rounded-lg"
             >
               Donate
-            </Link>
-            <Link
-              to="/charity-pages"
-              className="block px-4 py-2 text-sm hover:bg-gray-100 rounded-lg flex items-center"
-            >
-              <FileHeart className="mr-2 h-4 w-4" />
-              Charity Pages
             </Link>
             <Link
               to="/leaderboard"

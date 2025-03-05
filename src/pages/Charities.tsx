@@ -185,20 +185,19 @@ const Charities = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      {/* Back button on top */}
+      <div className="container mx-auto px-4 pt-24 pb-4">
+        <Button variant="ghost" asChild className="group mb-4">
+          <Link to="/" className="flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            Back to Home
+          </Link>
+        </Button>
+      </div>
+      
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-50 to-indigo-50 py-16">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" asChild className="group">
-                <Link to="/" className="flex items-center gap-2">
-                  <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-                  Back to Home
-                </Link>
-              </Button>
-            </div>
-          </div>
-
           <div className="mb-12 text-center max-w-3xl mx-auto">
             <h1 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
               Make a Real <span className="text-primary">Impact</span> Today
