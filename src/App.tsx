@@ -8,6 +8,9 @@ import Index from "./pages/Index";
 import Charities from "./pages/Charities";
 import Leaderboard from "./pages/Leaderboard";
 import Dashboard from "./pages/Dashboard";
+import CharityPages from "./pages/CharityPages";
+import CharityPageDetail from "./pages/CharityPageDetail";
+import CreateCharityPage from "./pages/CreateCharityPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +27,9 @@ const App = () => (
             <Route path="/charities" element={<Charities />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/charity-pages" element={<CharityPages />} />
+            <Route path="/charity-page/:id" element={<CharityPageDetail />} />
+            <Route path="/create-charity" element={<CreateCharityPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
