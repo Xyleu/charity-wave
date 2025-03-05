@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ChartBar, UserCircle, Edit, Heart } from "lucide-react";
+import { ChartBar, UserCircle, Edit, Heart, FileHeart } from "lucide-react";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
@@ -94,7 +94,16 @@ const Dashboard = () => {
       
       <div className="container mx-auto px-4 py-24">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8">Your Dashboard</h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-4xl font-bold">Your Dashboard</h1>
+            <Button 
+              onClick={() => navigate("/create-charity")}
+              className="flex items-center gap-2"
+            >
+              <FileHeart className="h-4 w-4" />
+              Create Your Charity Page
+            </Button>
+          </div>
           
           {/* Stats Overview */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

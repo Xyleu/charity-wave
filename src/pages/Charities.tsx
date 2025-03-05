@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Info, ExternalLink } from "lucide-react";
+import { ArrowLeft, Info, ExternalLink, ShieldCheck, FileHeart } from "lucide-react";
 import { campaigns, Category, getCategories } from "@/data/campaigns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Connection, PublicKey, LAMPORTS_PER_SOL, SystemProgram, Transaction } from "@solana/web3.js";
+import { CharityPage } from "@/types/charityPage";
 
 type CryptoOption = {
   symbol: string;
@@ -50,11 +51,73 @@ const cryptoOptions: CryptoOption[] = [
   },
 ];
 
+const mockCharityPages: CharityPage[] = [
+  {
+    id: "verified-1",
+    title: "Clean Water Initiative",
+    description: "Providing clean water access to rural communities.",
+    goal: 5000,
+    collected: 3250,
+    createdAt: "2023-10-15",
+    coverImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
+    category: "Environment",
+    isVerified: true,
+    walletAddress: "AoS7rRf1fRSSBSJKvT82zLGqSvP1RCcX1TJwGgMJ16Qb",
+    ownerName: "Global Water Foundation"
+  },
+  {
+    id: "verified-2",
+    title: "Education for All",
+    description: "Supporting education access in underprivileged areas.",
+    goal: 10000,
+    collected: 7500,
+    createdAt: "2023-11-05",
+    coverImage: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+    category: "Education",
+    isVerified: true,
+    walletAddress: "BPxEQmGfxdWEjWdnsxXXfEgSs8X2s2sgXzNcGKF3Kh2b",
+    ownerName: "Education Access Network"
+  },
+  {
+    id: "user-1",
+    title: "Local Animal Shelter Support",
+    description: "Help us care for abandoned animals in our community.",
+    goal: 2000,
+    collected: 850,
+    createdAt: "2023-12-10",
+    coverImage: "/placeholder.svg",
+    category: "Animals",
+    isVerified: false,
+    walletAddress: "AoS7rRf1fRSSBSJKvT82zLGqSvP1RCcX1TJwGgMJ16Qb",
+    ownerName: "John's Animal Support"
+  },
+  {
+    id: "user-2",
+    title: "Community Garden Project",
+    description: "Creating green spaces in urban neighborhoods.",
+    goal: 3000,
+    collected: 1200,
+    createdAt: "2024-01-20",
+    coverImage: "/placeholder.svg",
+    category: "Community",
+    isVerified: false,
+    walletAddress: "BPxEQmGfxdWEjWdnsxXXfEgSs8X2s2sgXzNcGKF3Kh2b",
+    ownerName: "Urban Greening Initiative"
+  }
+];
+
 const Charities = () => {
   const [showAll, setShowAll] = useState(false);
   const [donationAmount, setDonationAmount] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState(cryptoOptions[0]);
   const [selectedCategory, setSelectedCategory] = useState<Category | "all">("all");
+  const [showAllCommunity, setShowAllCommunity] = useState(false);
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+
+  useEffect(() => {
+    const walletConnected = localStorage.getItem('walletConnected');
+    setIsWalletConnected(walletConnected === 'true');
+  }, []);
 
   const categories = getCategories();
   
@@ -63,6 +126,10 @@ const Charities = () => {
     : campaigns.filter(campaign => campaign.category === selectedCategory);
 
   const displayedCampaigns = showAll ? filteredCampaigns : filteredCampaigns.slice(0, 6);
+
+  const displayedCommunityPages = showAllCommunity 
+    ? mockCharityPages 
+    : mockCharityPages.slice(0, 4);
 
   const handleFastDonation = async () => {
     try {
@@ -402,6 +469,78 @@ const Charities = () => {
                     </Link>
                   </Button>
                 </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Community Charity Pages */}
+      <div className="container mx-auto px-4 py-16 border-t border-gray-100">
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h2 className="text-3xl font-bold">Community Charity Pages</h2>
+              <p className="text-gray-600 mt-2">Support user-created charity campaigns</p>
+            </div>
+            <div className="flex gap-4">
+              <Button 
+                variant="outline" 
+                onClick={() => setShowAllCommunity(!showAllCommunity)}
+              >
+                {showAllCommunity ? "Show Less" : "View All"}
+              </Button>
+              <Button onClick={() => window.location.href = "/create-charity"}>
+                <FileHeart className="mr-2 h-4 w-4" />
+                Create Your Own
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {displayedCommunityPages.map((page) => (
+            <Card key={page.id} className="overflow-hidden h-full flex flex-col">
+              <div className="aspect-video w-full overflow-hidden">
+                <img 
+                  src={page.coverImage} 
+                  alt={page.title} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-lg font-semibold">{page.title}</h3>
+                  {page.isVerified && (
+                    <ShieldCheck className="h-5 w-5 text-green-500" />
+                  )}
+                </div>
+                <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                  {page.description}
+                </p>
+                <div className="space-y-2 mb-4">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-500">Goal:</span>
+                    <span className="font-medium">{page.goal} SOL</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-500">Raised:</span>
+                    <span className="font-medium">{page.collected} SOL</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+                    <div 
+                      className="bg-primary h-2 rounded-full" 
+                      style={{ width: `${Math.min(100, (page.collected / page.goal) * 100)}%` }}
+                    ></div>
+                  </div>
+                </div>
+                <Button 
+                  variant="default" 
+                  className="w-full mt-auto"
+                  onClick={() => window.location.href = `/charity-page/${page.id}`}
+                >
+                  View Details
+                </Button>
               </div>
             </Card>
           ))}
