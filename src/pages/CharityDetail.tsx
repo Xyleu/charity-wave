@@ -24,7 +24,7 @@ const CharityDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-8">
+    <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
         <Button variant="ghost" asChild className="group mb-8">
           <Link to="/charities" className="flex items-center gap-2">
@@ -33,14 +33,14 @@ const CharityDetail = () => {
           </Link>
         </Button>
 
-        <Card className="max-w-4xl mx-auto overflow-hidden">
+        <Card className="max-w-4xl mx-auto overflow-hidden bg-card/60 backdrop-blur-sm border-border/40">
           <div className="relative">
             <img
               src={campaign.image}
               alt={campaign.title}
               className="w-full h-[400px] object-cover"
             />
-            <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-sm">
+            <div className="absolute top-4 left-4 px-3 py-1 bg-background/80 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-sm border border-white/10">
               {campaign.icon}
               <span className="text-sm font-medium">{campaign.category}</span>
             </div>
@@ -48,7 +48,7 @@ const CharityDetail = () => {
 
           <div className="p-8">
             <h1 className="text-3xl font-bold mb-4">{campaign.title}</h1>
-            <p className="text-gray-600 text-lg mb-8">{campaign.description}</p>
+            <p className="text-gray-300 text-lg mb-8">{campaign.description}</p>
 
             <div className="space-y-6">
               <div>
@@ -64,20 +64,20 @@ const CharityDetail = () => {
                       {" "}raised of {campaign.target} SOL goal
                     </div>
                   </div>
-                  <div className="text-gray-600">
+                  <div className="text-gray-400">
                     {campaign.daysLeft} days left
                   </div>
                 </div>
               </div>
 
               <div className="space-y-6">
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-muted/50 p-6 rounded-lg border border-white/5">
                   <h2 className="text-xl font-semibold mb-4">Impact & Transparency</h2>
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
                       <div>
                         <h3 className="font-medium">Wallet Info</h3>
-                        <p className="text-sm text-gray-600">Donations are managed through a secure multi-sig wallet</p>
+                        <p className="text-sm text-gray-400">Donations are managed through a secure multi-sig wallet</p>
                       </div>
                     </div>
                   </div>

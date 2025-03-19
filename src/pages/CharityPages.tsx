@@ -82,13 +82,13 @@ const CharityPages: React.FC = () => {
       : mockCharityPages.filter(page => !page.isVerified);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Navbar />
       <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold">Charity Pages</h1>
-            <p className="text-gray-600 mt-2">Browse and support charity campaigns</p>
+            <p className="text-gray-400 mt-2">Browse and support charity campaigns</p>
           </div>
           <Button 
             onClick={() => navigate("/create-charity")} 
@@ -100,7 +100,7 @@ const CharityPages: React.FC = () => {
         </div>
 
         <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full mt-6">
-          <TabsList className="grid w-full md:w-[400px] grid-cols-3">
+          <TabsList className="grid w-full md:w-[400px] grid-cols-3 bg-muted/40">
             <TabsTrigger value="all">All</TabsTrigger>
             <TabsTrigger value="verified">Verified</TabsTrigger>
             <TabsTrigger value="community">Community</TabsTrigger>
@@ -109,7 +109,7 @@ const CharityPages: React.FC = () => {
           <TabsContent value={activeTab} className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPages.map((page) => (
-                <Card key={page.id} className="overflow-hidden h-full flex flex-col">
+                <Card key={page.id} className="overflow-hidden h-full flex flex-col bg-card/60 backdrop-blur-sm border-border/40 hover:border-primary/40 transition-all duration-300">
                   <div className="aspect-video w-full overflow-hidden">
                     <img 
                       src={page.coverImage} 
@@ -124,21 +124,21 @@ const CharityPages: React.FC = () => {
                         <ShieldCheck className="h-5 w-5 text-green-500" />
                       )}
                     </div>
-                    <CardDescription className="line-clamp-2">
+                    <CardDescription className="line-clamp-2 text-gray-400">
                       {page.description}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow">
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500">Goal:</span>
+                        <span className="text-gray-400">Goal:</span>
                         <span className="font-medium">{page.goal} SOL</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500">Raised:</span>
+                        <span className="text-gray-400">Raised:</span>
                         <span className="font-medium">{page.collected} SOL</span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                      <div className="w-full bg-gray-700 rounded-full h-2.5 mt-2">
                         <div 
                           className="bg-primary h-2.5 rounded-full" 
                           style={{ width: `${Math.min(100, (page.collected / page.goal) * 100)}%` }}

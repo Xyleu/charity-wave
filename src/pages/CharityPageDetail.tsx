@@ -105,7 +105,7 @@ const CharityPageDetail: React.FC = () => {
 
   if (!charityPage) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen">
         <Navbar />
         <div className="container mx-auto px-4 pt-24 pb-12 flex items-center justify-center">
           <p>Loading charity page...</p>
@@ -115,12 +115,12 @@ const CharityPageDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Navbar />
       <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="max-w-4xl mx-auto">
           <div className="mb-6">
-            <Button variant="outline" onClick={() => navigate("/charity-pages")}>
+            <Button variant="outline" onClick={() => navigate("/charity-pages")} className="border-white/10 hover:bg-white/5">
               Back to Charity Pages
             </Button>
           </div>
@@ -135,7 +135,7 @@ const CharityPageDetail: React.FC = () => {
             </div>
             
             {charityPage.isVerified && (
-              <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full flex items-center gap-2">
+              <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 border border-white/10">
                 <ShieldCheck className="h-4 w-4 text-green-500" />
                 <span className="text-sm font-medium">Verified Charity</span>
               </div>
@@ -147,15 +147,15 @@ const CharityPageDetail: React.FC = () => {
               <h1 className="text-3xl font-bold mb-4">{charityPage.title}</h1>
               
               <div className="flex flex-wrap gap-4 mb-6">
-                <div className="flex items-center text-sm">
+                <div className="flex items-center text-sm text-gray-400">
                   <Calendar className="h-4 w-4 mr-1 text-gray-500" />
                   <span>Created on {new Date(charityPage.createdAt).toLocaleDateString()}</span>
                 </div>
-                <div className="flex items-center text-sm">
+                <div className="flex items-center text-sm text-gray-400">
                   <User className="h-4 w-4 mr-1 text-gray-500" />
                   <span>By {charityPage.ownerName}</span>
                 </div>
-                <div className="flex items-center text-sm">
+                <div className="flex items-center text-sm text-gray-400">
                   <Wallet className="h-4 w-4 mr-1 text-gray-500" />
                   <span className="truncate" title={charityPage.walletAddress}>
                     {charityPage.walletAddress.slice(0, 6)}...{charityPage.walletAddress.slice(-4)}
@@ -165,34 +165,34 @@ const CharityPageDetail: React.FC = () => {
               
               <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-3">About this campaign</h2>
-                <p className="text-gray-700 whitespace-pre-line">
+                <p className="text-gray-300 whitespace-pre-line">
                   {charityPage.description}
                 </p>
               </div>
             </div>
             
             <div>
-              <Card>
+              <Card className="bg-card/60 backdrop-blur-sm border-border/40">
                 <CardHeader>
                   <CardTitle>Donation Progress</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span className="text-gray-500">Goal:</span>
+                      <span className="text-gray-400">Goal:</span>
                       <span className="font-medium">{charityPage.goal} SOL</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-500">Raised:</span>
+                      <span className="text-gray-400">Raised:</span>
                       <span className="font-medium">{charityPage.collected} SOL</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                    <div className="w-full bg-gray-700 rounded-full h-2.5 mt-2">
                       <div 
                         className="bg-primary h-2.5 rounded-full" 
                         style={{ width: `${Math.min(100, (charityPage.collected / charityPage.goal) * 100)}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm text-right text-gray-500">
+                    <div className="text-sm text-right text-gray-400">
                       {Math.round((charityPage.collected / charityPage.goal) * 100)}% of goal
                     </div>
                     
@@ -203,6 +203,7 @@ const CharityPageDetail: React.FC = () => {
                           placeholder="Amount (SOL)"
                           value={donationAmount}
                           onChange={(e) => setDonationAmount(e.target.value)}
+                          className="bg-background/50 border-white/10"
                         />
                       </div>
                       <Button 
