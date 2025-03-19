@@ -5,33 +5,33 @@
  
 @layer base {
   :root {
-    --background: 250 20% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 98%;
  
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
  
-    --primary: 155 68% 97%;
-    --primary-foreground: 155 100% 0%;
+    --primary: 252 71% 75%;
+    --primary-foreground: 0 0% 98%;
  
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --secondary: 250 60% 52%;
+    --secondary-foreground: 0 0% 98%;
  
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
  
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
  
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 155 68% 97%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 252 71% 75%;
  
     --radius: 0.75rem;
   }
@@ -42,7 +42,7 @@
 
   body {
     @apply bg-background text-foreground antialiased min-h-screen;
-    background: linear-gradient(to bottom, #f8f9fe, #f3f4f9);
+    background: linear-gradient(to bottom, #121212, #1a1a1a);
   }
 
   /* Custom scrollbar */
@@ -56,10 +56,28 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full;
+    @apply bg-primary/30 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
+    @apply bg-primary/50;
+  }
+  
+  /* Horizontal scroll container */
+  .scroll-container {
+    @apply flex overflow-x-auto py-4 gap-6 pb-8 snap-x;
+    scroll-padding: 1.5rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .scroll-item {
+    @apply flex-shrink-0 snap-start;
+    width: 320px;
   }
 }
+

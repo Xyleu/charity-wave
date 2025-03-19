@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -184,10 +185,10 @@ const Charities = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-background to-background/80">
       {/* Back button on top */}
       <div className="container mx-auto px-4 pt-24 pb-4">
-        <Button variant="ghost" asChild className="group mb-4">
+        <Button variant="ghost" asChild className="group mb-4 text-foreground/80 hover:text-foreground">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Home
@@ -196,20 +197,20 @@ const Charities = () => {
       </div>
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-purple-50 to-indigo-50 py-16">
+      <div className="bg-gradient-to-r from-primary/10 to-secondary/10 py-16">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-5xl font-bold text-foreground mb-6 leading-tight">
               Make a Real <span className="text-primary">Impact</span> Today
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-foreground/80 mb-8">
               Support these urgent causes and make a real difference in people's lives. 
               Every donation counts towards creating positive change.
             </p>
             <div className="flex justify-center gap-4 mb-8">
               <Button 
                 size="lg" 
-                className="text-lg px-8" 
+                className="text-lg px-8 bg-primary text-primary-foreground hover:bg-primary/90" 
                 onClick={() => {
                   document.getElementById('campaigns')?.scrollIntoView({ behavior: 'smooth' });
                 }}
@@ -218,12 +219,12 @@ const Charities = () => {
               </Button>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button size="lg" variant="outline" className="text-lg px-8">
+                  <Button size="lg" variant="outline" className="text-lg px-8 border-primary/20 text-foreground hover:bg-primary/10">
                     <Info className="mr-2 h-4 w-4" />
                     Learn More
                   </Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="bg-card text-card-foreground">
                   <DialogHeader>
                     <DialogTitle>About Our Charity Platform</DialogTitle>
                     <DialogDescription className="pt-4 space-y-4">
@@ -240,7 +241,7 @@ const Charities = () => {
                         You can track your donations and see their direct impact on the causes you support.
                       </p>
                       <div className="flex justify-end">
-                        <Button asChild>
+                        <Button asChild className="bg-primary hover:bg-primary/90">
                           <a 
                             href="https://docs.charityledger.com" 
                             target="_blank" 
@@ -261,21 +262,21 @@ const Charities = () => {
       </div>
 
       {/* Fast Donation Section */}
-      <div className="bg-white py-16 border-y border-gray-100">
+      <div className="bg-card py-16 border-y border-muted">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold mb-6">
                 Fast Donation with <span className="text-primary">Charity Ledger</span>
               </h2>
-              <div className="space-y-4 text-gray-600">
+              <div className="space-y-4 text-foreground/80">
                 <p className="text-lg">
                   Trust us to manage your donations effectively. We accept these 5 cryptocurrencies
                   and ensure your contribution reaches those who need it most.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
-                    <div className="rounded-full p-1 bg-primary/10 text-primary mt-1">
+                    <div className="rounded-full p-1 bg-primary/20 text-primary mt-1">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -283,7 +284,7 @@ const Charities = () => {
                     Automatic funds distribution to verified charities
                   </li>
                   <li className="flex items-start gap-2">
-                    <div className="rounded-full p-1 bg-primary/10 text-primary mt-1">
+                    <div className="rounded-full p-1 bg-primary/20 text-primary mt-1">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -291,7 +292,7 @@ const Charities = () => {
                     Support multiple causes with a single transaction
                   </li>
                   <li className="flex items-start gap-2">
-                    <div className="rounded-full p-1 bg-primary/10 text-primary mt-1">
+                    <div className="rounded-full p-1 bg-primary/20 text-primary mt-1">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -307,7 +308,7 @@ const Charities = () => {
                       key={crypto.symbol}
                       size="lg" 
                       variant={selectedCrypto.symbol === crypto.symbol ? "default" : "outline"}
-                      className="text-lg gap-2"
+                      className={`text-lg gap-2 ${selectedCrypto.symbol === crypto.symbol ? 'bg-primary text-primary-foreground' : 'border-primary/20 hover:bg-primary/10'}`}
                       onClick={() => setSelectedCrypto(crypto)}
                     >
                       <img 
@@ -321,10 +322,10 @@ const Charities = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8">
+            <div className="bg-gradient-to-br from-card/50 to-card rounded-2xl p-8 border border-muted">
               <div className="space-y-6">
                 <div>
-                  <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="amount" className="block text-sm font-medium text-foreground/80 mb-1">
                     Donation Amount
                   </label>
                   <div className="relative">
@@ -334,14 +335,14 @@ const Charities = () => {
                       value={donationAmount}
                       onChange={(e) => setDonationAmount(e.target.value)}
                       step="any"
-                      className="block w-full rounded-lg border-gray-300 pl-4 pr-20 focus:border-primary focus:ring-primary sm:text-sm"
+                      className="block w-full rounded-lg bg-muted border-muted text-foreground pl-4 pr-20 focus:border-primary focus:ring-primary sm:text-sm"
                       placeholder="Enter amount"
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center">
                       <select
                         value={selectedCrypto.symbol}
                         onChange={(e) => setSelectedCrypto(cryptoOptions.find(c => c.symbol === e.target.value) || cryptoOptions[0])}
-                        className="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-primary focus:ring-primary sm:text-sm"
+                        className="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-foreground/80 focus:border-primary focus:ring-primary sm:text-sm"
                       >
                         {cryptoOptions.map((crypto) => (
                           <option key={crypto.symbol} value={crypto.symbol}>
@@ -353,12 +354,12 @@ const Charities = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="impact-area" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="impact-area" className="block text-sm font-medium text-foreground/80 mb-1">
                     Select Impact Area (Optional)
                   </label>
                   <select
                     id="impact-area"
-                    className="block w-full rounded-lg border-gray-300 focus:border-primary focus:ring-primary sm:text-sm"
+                    className="block w-full rounded-lg bg-muted border-muted text-foreground focus:border-primary focus:ring-primary sm:text-sm"
                   >
                     <option value="">Let Charity Ledger decide</option>
                     <option value="urgent">Most Urgent Needs</option>
@@ -368,13 +369,13 @@ const Charities = () => {
                   </select>
                 </div>
                 <Button 
-                  className="w-full text-lg py-6" 
+                  className="w-full text-lg py-6 bg-primary hover:bg-primary/90" 
                   size="lg"
                   onClick={handleFastDonation}
                 >
                   Make Fast Donation
                 </Button>
-                <p className="text-xs text-gray-500 text-center">
+                <p className="text-xs text-foreground/60 text-center">
                   Your donation will be distributed based on our impact assessment
                   and urgent needs across verified charitable organizations.
                 </p>
@@ -384,7 +385,7 @@ const Charities = () => {
         </div>
       </div>
 
-      {/* Campaigns Grid */}
+      {/* Campaigns Grid - Now Horizontally Scrollable */}
       <div id="campaigns" className="container mx-auto px-4 py-16">
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
@@ -392,16 +393,18 @@ const Charities = () => {
             <Button 
               variant="outline" 
               onClick={() => setShowAll(!showAll)}
+              className="border-primary/20 hover:bg-primary/10 text-foreground"
             >
               {showAll ? "Show Less" : "View All"}
             </Button>
           </div>
           
           <Tabs defaultValue="all" className="w-full">
-            <TabsList className="flex flex-wrap gap-2">
+            <TabsList className="flex flex-wrap gap-2 bg-muted/50">
               <TabsTrigger 
                 value="all" 
                 onClick={() => setSelectedCategory("all")}
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 All Campaigns
               </TabsTrigger>
@@ -410,6 +413,7 @@ const Charities = () => {
                   key={category} 
                   value={category}
                   onClick={() => setSelectedCategory(category)}
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                 >
                   {category}
                 </TabsTrigger>
@@ -418,51 +422,55 @@ const Charities = () => {
           </Tabs>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Horizontal scrollable container */}
+        <div className="scroll-container">
           {displayedCampaigns.map((campaign) => (
-            <Card key={campaign.id} className="group flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl">
+            <Card 
+              key={campaign.id} 
+              className="scroll-item group flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl bg-card border-muted"
+            >
               <div className="relative overflow-hidden">
                 <img
                   src={campaign.image}
                   alt={campaign.title}
                   className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-sm">
+                <div className="absolute top-4 left-4 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-sm">
                   {campaign.icon}
-                  <span className="text-sm font-medium">{campaign.category}</span>
+                  <span className="text-sm font-medium text-white">{campaign.category}</span>
                 </div>
               </div>
               
-              <div className="p-6 flex-1 flex flex-col bg-white">
+              <div className="p-6 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
                   {campaign.title}
                 </h3>
-                <p className="text-gray-600 mb-6 flex-1">{campaign.description}</p>
+                <p className="text-foreground/70 mb-6 flex-1">{campaign.description}</p>
                 
                 <div className="space-y-4">
                   <div className="relative pt-1">
                     <Progress 
                       value={(campaign.collected / campaign.target) * 100} 
-                      className="h-2"
+                      className="h-2 bg-muted"
                     />
-                    <div className="absolute -top-2 right-0 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                    <div className="absolute -top-2 right-0 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full">
                       {Math.round((campaign.collected / campaign.target) * 100)}%
                     </div>
                   </div>
                   
                   <div className="flex justify-between items-center">
                     <div className="space-y-1">
-                      <div className="text-sm text-gray-600">
+                      <div className="text-sm text-foreground/70">
                         <span className="font-semibold text-primary">{campaign.collected} SOL</span>
                         {" "}of {campaign.target} SOL
                       </div>
                     </div>
-                    <div className="text-sm font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                    <div className="text-sm font-medium text-foreground/70 bg-muted/50 px-3 py-1 rounded-full">
                       {campaign.daysLeft} days left
                     </div>
                   </div>
                   
-                  <Button asChild className="w-full group-hover:bg-primary/90 transition-colors">
+                  <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                     <Link to={`/charity/${campaign.id}`}>
                       Donate Now
                     </Link>
@@ -475,21 +483,25 @@ const Charities = () => {
       </div>
 
       {/* Community Charity Pages */}
-      <div className="container mx-auto px-4 py-16 border-t border-gray-100">
+      <div className="container mx-auto px-4 py-16 border-t border-muted">
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <div>
               <h2 className="text-3xl font-bold">Community Charity Pages</h2>
-              <p className="text-gray-600 mt-2">Support user-created charity campaigns</p>
+              <p className="text-foreground/70 mt-2">Support user-created charity campaigns</p>
             </div>
             <div className="flex gap-4">
               <Button 
                 variant="outline" 
                 onClick={() => setShowAllCommunity(!showAllCommunity)}
+                className="border-primary/20 hover:bg-primary/10 text-foreground"
               >
                 {showAllCommunity ? "Show Less" : "View All"}
               </Button>
-              <Button onClick={() => window.location.href = "/create-charity"}>
+              <Button 
+                onClick={() => window.location.href = "/create-charity"}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
                 <FileHeart className="mr-2 h-4 w-4" />
                 Create Your Own
               </Button>
@@ -499,7 +511,7 @@ const Charities = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {displayedCommunityPages.map((page) => (
-            <Card key={page.id} className="overflow-hidden h-full flex flex-col">
+            <Card key={page.id} className="overflow-hidden h-full flex flex-col bg-card border-muted">
               <div className="aspect-video w-full overflow-hidden">
                 <img 
                   src={page.coverImage} 
@@ -514,19 +526,19 @@ const Charities = () => {
                     <ShieldCheck className="h-5 w-5 text-green-500" />
                   )}
                 </div>
-                <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                <p className="text-sm text-foreground/70 mb-4 line-clamp-2">
                   {page.description}
                 </p>
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">Goal:</span>
+                    <span className="text-foreground/50">Goal:</span>
                     <span className="font-medium">{page.goal} SOL</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">Raised:</span>
+                    <span className="text-foreground/50">Raised:</span>
                     <span className="font-medium">{page.collected} SOL</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+                  <div className="w-full bg-muted rounded-full h-2 mt-1">
                     <div 
                       className="bg-primary h-2 rounded-full" 
                       style={{ width: `${Math.min(100, (page.collected / page.goal) * 100)}%` }}
@@ -535,7 +547,7 @@ const Charities = () => {
                 </div>
                 <Button 
                   variant="default" 
-                  className="w-full mt-auto"
+                  className="w-full mt-auto bg-primary hover:bg-primary/90 text-primary-foreground"
                   onClick={() => window.location.href = `/charity-page/${page.id}`}
                 >
                   View Details
